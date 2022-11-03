@@ -1,0 +1,276 @@
+:root {
+    --off-white: #fff9f9;
+    --lt-blue: #b4d2e7;
+    --dk-blue: #000040;
+    --grey: #a1a6b4;
+    --mint: #93c5cc;
+    
+    --green: #679983;
+    --red: rgba(114,20,33, 0.8); /* #880000; */
+    
+    font-size: 62.5%; /** base of 10 **/
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1.8rem; /**18px**/
+    color: var(--dk-blue);
+    background-color: var(--off-white);
+}
+
+/** typography **/
+h2 {
+    font-size: 2.8rem; /**28px**/
+    margin-left: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+/** screen reader **/
+.sr-only {
+    position: absolute;
+    left: -99999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+header {
+    background-color: var(--dk-blue);
+    padding: 1.6rem;
+    position: relative;
+}
+
+.inner-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+svg { fill: var(--off-white); }
+.logo { width: 13rem; } /**130px **/
+.toggle svg { width: 6rem; } /*60px */
+
+/** styling */
+nav {
+    background-color: var(--dk-blue);
+    min-width: 30rem; 
+    height: 100vh;
+}
+
+/** hide your menu **/
+.sliding-nav {
+    position: absolute;
+    top: 0;
+    left: -30rem; /**-300px slide off screen */
+    z-index: 1;
+    transition: left 1s ease-in-out;
+}
+
+/** bring the menu back in using a special class created through js. **/
+.active-nav .sliding-nav {
+    top: 0;
+    left:0;
+} 
+
+/** style the links **/
+ul.menu-links {
+    margin: 5rem 0 0;
+}
+
+ul.menu-links li {
+    line-height: 5rem;
+    text-align: center;
+    border-bottom: 0.2rem solid var(--lt-blue);
+    transition: all 0.3s ease-in-out;
+}
+
+ul.menu-links li a {
+    color: var(--lt-blue);
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+}
+
+/** hover state **/
+ul.menu-links li:hover,
+ul.menu-links li:active {
+    background-color: var(--lt-blue);
+}
+ul.menu-links li a:hover,
+ul.menu-links li a:active {
+    color: var(--dk-blue);
+}
+
+/** styling the search form **/
+::-webkit-input-placeholder /**chrome/opera/safari*/,
+::-moz-placeholder /**firefox**/, 
+:-ms-input-placeholder /** ie10+ **/,
+::placeholder {
+    color: var(--dk-blue);
+}
+
+.search-form {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 1rem;
+}
+
+input[id="searchbar"] {
+    width: 100%;
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 4rem;
+    padding: 0.5rem 0.5rem 0.5rem 4.5rem;
+}
+
+.search-form button {
+    background: transparent;
+    outline: 0;
+    border: none;
+    position: absolute;
+    top: 0.3rem;
+    cursor: pointer;
+}
+
+.search-form button svg {
+    width: 4rem;
+    height: 4rem;
+    fill: var(--mint);
+}
+
+section {
+    padding: 3rem 1.6rem;
+}
+
+.account-form {
+    padding: 1.6rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--grey);
+    box-shadow: 0.3rem 0.3rem 0.5rem var(--grey);
+}
+
+.account-form > div { 
+    margin-bottom: 2rem;
+}
+
+.account-form label {
+    display: block;
+}
+
+.account-form input[type=text],
+.account-form input[type=email],
+.account-form input[type=password] {
+    width: 100%;
+    height: 4rem;
+    border: none;
+    border-bottom: 0.1rem solid var(--dk-blue);
+}
+
+.account-form input[type=submit] {
+    border: 0.2rem solid transparent;
+    border-radius: 0.5rem;
+    background-color: var(--mint);
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0.1rem 0.1rem 0.1rem var(--mint);
+}
+
+.account-form input[type=submit]:hover {
+    cursor: pointer;
+    background-color: var(--off-white);
+    border: 0.2rem solid var(--mint);
+    color: var(--dk-blue);
+}
+
+/** form validation - user friendly **/
+/** create a valid state first **/
+.account-form input[type=text]:valid,
+.account-form input[type=email]:valid,
+.account-form input[type=password]:valid {
+    border-radius: 0.5rem;
+    background-color: var(--green);
+    color: var(--off-white);
+}
+/** when the input is....
+1. not empty
+2. not in focus
+3. not valid
+/** display a form field without initially showing validation **/
+.account-form input[type="text"]:invalid:not(:focus):not(:placeholder-shown),
+.account-form input[type="email"]:invalid:not(:focus):not(:placeholder-shown),
+.account-form input[type="password"]:invalid:not(:focus):not(:placeholder-shown) {
+    border-radius: 0.5rem;
+    background-color: var(--red);
+    color: var(--off-white);
+}
+
+.account-form input[type="text"]:invalid:focus:not(:placeholder-shown),
+.account-form input[type="email"]:invalid:focus:not(:placeholder-shown) ~ .hint,
+.account-form input[type="password"]:invalid:focus:not(:placeholder-shown) ~ .hint {
+ max-height: 20rem;
+ transition: max-height 0.3s ease-in-out;   
+}
+
+
+/** hint **/
+.hint {
+    margin-top: 1rem;
+    font-style: italic;
+    color: var(--red);
+    max-height: 0;
+    overflow: hidden;
+}
+
+:focus {
+    outline: 0.2rem solid var(--mint);       
+}   
+
+@media screen and (min-width: 760px) {
+    .toggle { display: none; }
+
+    nav {
+        height: auto;
+        min-width: initial;
+    }
+
+    .sliding-nav {
+        position: relative;
+        top: 0;
+        left:0;
+    }
+
+    ul.menu-links {
+        display: flex;
+        margin: 0;
+    }
+    ul.menu-links li {
+        border-bottom: none;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        border-radius: 0.5rem;
+    }
+
+}
+
+@media screen and (min-width: 1100px) {
+    .inner-container {
+        flex-wrap: nowrap;
+    }
+    .search-form {
+        width: initial;
+    }
+
+    section {
+        margin: 3rem auto;
+        max-width: 80rem; /**800px**/
+    }
+
+}
