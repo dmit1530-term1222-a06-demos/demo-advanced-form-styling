@@ -1,4 +1,4 @@
-# [DEMO] Advanced Form Styling
+# DEMO | Advanced Form Styling
 
 This demo is broken into 3 videos and covers the following:
 
